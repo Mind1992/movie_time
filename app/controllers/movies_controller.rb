@@ -8,6 +8,10 @@ class MoviesController < ApplicationController
     end
   end
 
+  def new
+    @movie = Movie.new
+  end
+
   def show
     @movie = Movie.find(params[:id])
 
@@ -16,4 +20,5 @@ class MoviesController < ApplicationController
       format.json { render :json => @movie }
     end
   end
+
 end
