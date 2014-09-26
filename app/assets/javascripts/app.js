@@ -7,4 +7,9 @@ movieTime.config(function ($routeProvider) {
         controller: 'MoviesController',
         templateUrl: 'Movies.html'
       })
+    .when('/{{movie.id}}',
+      {
+        controller: 'MovieController',
+        templateUrl: 'Movie.html'
+      })
 });
