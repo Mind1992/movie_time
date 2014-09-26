@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+
   def index
     @movies = Movie.all
 
@@ -12,6 +13,21 @@ class MoviesController < ApplicationController
     @movie = Movie.new
   end
 
+  def create
+    @movie = Movie.new(movie_params)
+    if @movie.save
+      respond_to do |format|
+        format.html
+        format.json { render :json => @movie, :status => 201 }
+      end
+    else
+      respond_to do |format|
+        format.html
+        format.json { render :json => @movie.errors, :status => 422 }
+      end
+    end
+  end
+
   def show
     @movie = Movie.find(params[:id])
 
@@ -21,4 +37,38 @@ class MoviesController < ApplicationController
     end
   end
 
+  def edit
+    @movie = Movie.find(params[:id])
+  end
+
+  def update
+    @movie = Movie.find(params[:id])
+    if @movie.update(movie_params)
+      respond_to do |format|
+        format.html
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html
+        format.json { render :json => @movie.errors, :status => 422 }
+      end
+    end
+  end
+
+  def destroy
+    @movie = Movie.find(params[:id])
+    @movie.destroy
+
+    respond_to do |format|
+      format.html
+      format.json { head :no_content}
+    end
+  end
+
+  private
+
+  def movie_params
+    params.require(:movie).permit(:title)
+  end
 end
