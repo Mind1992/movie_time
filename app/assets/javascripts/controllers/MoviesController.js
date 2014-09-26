@@ -1,16 +1,22 @@
-movieTime.controller('MoviesController', function MoviesController($scope, MoviesFactory) {
+movieTime.controller('MoviesCtrl', function($scope, MoviesFactory) {
   $scope.MoviesFactory = MoviesFactory;
   $scope.movies = MoviesFactory.movies;
 
   $scope.getMovies = function() {
     MoviesFactory.getMovies()
       .success(function(data) {
-        $scope.movies = data
+        $scope.movies = data;
       })
       .error(function() {
         alert("Something went wrong!")
       })
-  }
+  }();
 
-  $scope.getMovies();
+  $scope.addMovie = function() {
+    MoviesFactory.addMovie(MoviesFactory.movieTitle)
+      .success(function(movie) {
+      $scope.movies.push(movie);
+      MoviesFactory.movieTitle = null;
+    })
+  }
 });

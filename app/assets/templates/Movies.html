@@ -1,4 +1,14 @@
+<div class="container" ng-controller="MoviesCtrl">
 <ul ng-repeat="movie in movies">
   <li><a href="/#/movies/{{movie.id}}">{{movie.title}}</a></li>
 </ul>
+
+<h2>New Movie</h2>
+<form ng-submit="addMovie()" class="form-inline" role="form">
+  <input type="text" ng-model="MoviesFactory.movieTitle" class="form-control" id="movie-title" ng-model="movie.title" placeholder="Enter title" required/>
+  <button class="btn btn-default" type="submit">Add</button>
+</form>
+</div>
+
+
 

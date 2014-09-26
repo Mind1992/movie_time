@@ -4,7 +4,6 @@ class MoviesController < ApplicationController
     @movies = Movie.all
 
     respond_to do |format|
-      format.html
       format.json { render :json => @movies }
     end
   end
@@ -14,15 +13,14 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = Movie.new(movie_params)
+    @movie = Movie.new
+    @movie.title = params[:movieTitle]
     if @movie.save
       respond_to do |format|
-        format.html
         format.json { render :json => @movie, :status => 201 }
       end
     else
       respond_to do |format|
-        format.html
         format.json { render :json => @movie.errors, :status => 422 }
       end
     end
@@ -32,7 +30,6 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
 
     respond_to do |format|
-      format.html
       format.json { render :json => @movie }
     end
   end
@@ -45,12 +42,10 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     if @movie.update(movie_params)
       respond_to do |format|
-        format.html
         format.json { head :no_content }
       end
     else
       respond_to do |format|
-        format.html
         format.json { render :json => @movie.errors, :status => 422 }
       end
     end
@@ -61,7 +56,6 @@ class MoviesController < ApplicationController
     @movie.destroy
 
     respond_to do |format|
-      format.html
       format.json { head :no_content}
     end
   end

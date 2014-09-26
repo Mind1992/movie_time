@@ -10,5 +10,9 @@ movieTime.factory('MoviesFactory', function MoviesFactory($http) {
     return $http.get('/movies/' + id + '.json')
   };
 
+  factory.addMovie = function() {
+    return $http.post('/movies.json', factory);
+  };
+
   return factory;
 })
