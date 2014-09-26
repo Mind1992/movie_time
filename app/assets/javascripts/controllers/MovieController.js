@@ -1,12 +1,12 @@
-movieTime.controller('MovieController', function MoviesController($scope, MoviesFactory, $routeParams) {
+movieTime.controller('MovieController', function($scope, MoviesFactory, $routeParams) {
   $scope.MoviesFactory = MoviesFactory;
 
   $scope.showMovie = function() {
     MoviesFactory.showMovie($routeParams.id)
       .success(function(data) {
-        $scope.movies = data;
+        $scope.movie = data;
       })
   };
 
-  $scope.getMovies();
+  $scope.showMovie();
 });

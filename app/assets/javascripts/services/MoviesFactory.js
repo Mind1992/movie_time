@@ -7,7 +7,7 @@ movieTime.factory('MoviesFactory', function MoviesFactory($http) {
   };
 
   factory.showMovie = function(id) {
-    return $http.get('/movies/' + id + ',json')
+    return $http.get('/movies/' + id + '.json')
   };
 
   return factory;
